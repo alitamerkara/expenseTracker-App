@@ -4,10 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RecentExpenses from './pages/RecentExpenses';
 import AllExpenses from './pages/AllExpenses';
 import ManageExpenses from './pages/ManageExpenses';
-import { Ionicons } from '@expo/vector-icons';
 import Icons from './components/Icons';
-
-
+import ExpenseContextProvider from './store/ExpenseContext';
 export default function App() {
 const Stack= createNativeStackNavigator();
 const Bottom= createBottomTabNavigator();
@@ -18,7 +16,7 @@ const ExpenseOverview=()=>{
         headerStyle:{backgroundColor:"#2b0097"},
         headerTintColor:"white",
         tabBarStyle:{backgroundColor:"#2b0097"},
-        tabBarActiveTintColor:"#bca2ff",
+        tabBarActiveTintColor:"#7b48fc",
         headerRight: ()=> <Icons name="add" size={30} onPress={()=>{navigation.navigate("ManageExpense")}}/>
       }
     )}>
@@ -34,6 +32,7 @@ const ExpenseOverview=()=>{
   )
 }
   return (
+    <ExpenseContextProvider>
     <NavigationContainer>
    <Stack.Navigator screenOptions={{
     headerStyle:{backgroundColor:"#2b0097"},
@@ -43,6 +42,7 @@ const ExpenseOverview=()=>{
     <Stack.Screen name='ManageExpense' component={ManageExpenses} options={{presentation:"modal"}}/>
    </Stack.Navigator>
     </NavigationContainer>
+    </ExpenseContextProvider>
   );
 }
 

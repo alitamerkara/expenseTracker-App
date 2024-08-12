@@ -14,7 +14,7 @@ const RecentExpenses = () => {
 const styles= StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:"#9a72ff"
+    backgroundColor:"#190059"
   }
 })
 export default RecentExpenses

@@ -5,10 +5,14 @@ import { useNavigation } from '@react-navigation/native'
 const ExpensesList = () => {
 const editDates=(date)=>`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
 const navigation= useNavigation()
-const pressHandler= ()=>{navigation.navigate("ManageExpense")}
+
 const runExpenses=(dataItem)=>{
 return(
-<Pressable onPress={pressHandler} style={({pressed})=>pressed && styles.pressed}>
+<Pressable onPress={()=>{
+    navigation.navigate("ManageExpense", {
+        id: dataItem.item.id,
+    })
+}} style={({pressed})=>pressed && styles.pressed}>
     <View style={styles.card}>
     <Text style={styles.text} >{dataItem.item.name}</Text>
     <Text style={styles.text}>{editDates(dataItem.item.date)}</Text>
@@ -23,7 +27,7 @@ return(
 const styles= StyleSheet.create({
 card:{
     margin:10,
-    backgroundColor:"#3900c8",
+    backgroundColor:"#986fff",
     paddingHorizontal:15,
     paddingVertical:6,
     position:"relative",
@@ -33,10 +37,11 @@ amount:{
     position:"absolute",
     top:10,
     right:5,
-    backgroundColor:"#b293ff",
+    backgroundColor:"#3900c8",
     color:"white",
     padding:6,
     borderRadius:8,
+    overflow: 'hidden',
 },
 text:{
     color:"white",
